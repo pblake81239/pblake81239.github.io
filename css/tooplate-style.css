@@ -8,14 +8,13 @@ http://www.tooplate.com/view/2102-constructive
 
 body {
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-	font-size: 18px;
-	font-weight: 300;
-    color: white;
+	font-size: 22px;
+	font-weight: 400;
+    color: #3aff33;
 	overflow-x: hidden;
     min-height: 100vh;
     height: 100%;
     position: relative;
-    background: #222222;
 }
 
 #preload-01 { background: url(../img/constructive_bg_01.jpg) no-repeat -9999px -9999px; }
@@ -46,7 +45,7 @@ p {
 p:last-child { margin-bottom: 0; }
 
 .tm-bg-transparent-black {
-    background-color: rgba(0,0,0,0.25);    
+    background-color: rgba(0,0,0,0.70);    
     padding: 30px;
 }
 
@@ -168,15 +167,15 @@ p:last-child { margin-bottom: 0; }
 .tm-main-nav a:hover,
 .tm-main-nav a:focus,
 .tm-main-nav a.active {
-    background-image: url(../img/nav-item-highlight.png);
-    color: #33ccff;
+    background-image: url(../img/nav-item-highlight_green.png);
+    color: #3aff33;/* color: #33ccff; */
     text-decoration: none;    
 }
 
 .tm-main-nav a:hover .tm-nav-fa-icon,
 .tm-main-nav a:focus .tm-nav-fa-icon,
 .tm-main-nav a.active .tm-nav-fa-icon {
-    border-color: #33ccff;
+    color: #3aff33;
 }
 
 .fa-menu {
@@ -194,10 +193,79 @@ p:last-child { margin-bottom: 0; }
     cursor: pointer;
 }
 
+.tm-tabs-container {
+    display: flex;
+    padding-top: 40px;
+    padding-bottom: 135px;
+  }
+  
+  .tm-tab-links {
+    margin-right: 40px;
+    width: 380px;
+  }
+  
+  .tm-tab-contents {
+    width: calc(100% - 420px);
+  
+  }
+  
+  #tmServices .tabs li {
+    margin-bottom: 36px;
+  }
+  
+  #tmServices .tabs li:last-child {
+    margin-bottom: 0;
+  }
+  
+  #tmServices .tabs a {
+    display: flex;
+    align-items: center;  
+    text-align: left;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background-color: rgba(15, 29, 32, 0.77);
+    border: 1px solid rgba(15, 29, 32, 0.77);
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 20px 30px;
+    transition: all 0.3s;  
+  }
+  
+  #tmServices .tabs .icon-wrap {
+    width: 75px;
+    height: 75px;
+    border: 1px solid white;
+    border-radius: 50%;  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30px;
+  }
+  
+  #tmServices .tabs .active,
+  #tmServices .tabs a:hover {
+      border-color: white;
+      color: #fff!important;
+  }
+  
+  #first-tab-group > div {
+    background-color: rgba(15, 29, 32, 0.77);
+    color: white;
+    padding: 45px 60px;
+    min-height: 423px;
+  }
+  
+  .tm-service-tab-title,
+  .tm-service-tab-p {
+    margin-bottom: 40px;
+  }
+
 .tm-btn:hover,
 .tm-btn:focus {
-    color: #33ccff;
-    border-color: #33ccff;
+    color: #3aff33;/* color: #33ccff; */
+    border-color: #3aff33;
 }
 
 .tm-btn-submit {
@@ -241,7 +309,7 @@ address { font-size: 1rem; }
 .form-control:focus {
     background: transparent;
     color: white;
-    border-color: #33ccff;
+    border-color: #3aff33;
     box-shadow: none;
 }
 
@@ -347,7 +415,7 @@ footer a { color: white; }
         padding: 10px 15px;
         background: #000000c4;
         border: 1px solid;
-        color: #33ccff;
+        color: #3aff33;
         cursor: pointer;
         margin-top: 4px;
         margin-left: 4px;
@@ -560,3 +628,66 @@ footer a { color: white; }
 .no-js #loader-wrapper {
     display: none;
 }
+
+/* Intro section start */
+.tm-intro-box {
+    max-width: 720px;
+    min-height: 480px;
+    border-radius: 10px;
+    text-align: center;
+    padding: 40px 50px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+/* Features section start */
+.tm-bg-white-transparent {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  .tm-bg-grey-transparent {
+    background-color: rgba(122, 122, 122, 0.8);
+  }
+
+#tmFeatures {
+    padding-top: 68px;
+    padding-bottom: 60px;
+    max-width: 1260px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .tm-feature-box {
+    max-width: 360px;
+    min-height: 480px;
+    border-radius: 10px;
+    text-align: center;
+    padding: 40px 50px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .tm-feature-name {
+    color: 3aff33;
+    margin-bottom: 50px;
+    font-size: 26px;
+  }
+  .tm-feature-name-descripton {
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	font-weight: 600;
+    color: rgb(2, 2, 2);
+    font-weight: 600;
+  }
+  .tm-feature-icon-container {
+    width: 110px;
+    height: 110px;
+    border: 1px solid #3E3F40;
+    border-radius: 50%;  
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 60px;
+  }
