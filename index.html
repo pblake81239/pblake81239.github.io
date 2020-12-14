@@ -43,10 +43,17 @@
 			<!-- Sidebar -->
 			<div id="tmSideBar" class="col-xl-3 col-lg-4 col-md-12 col-sm-12 sidebar">
 
+
+
 				<button id="tmMainNavToggle" class="menu-icon">&#9776;</button>
+
+
 
 				<div class="inner">
 					<nav id="tmMainNav" class="tm-main-nav">
+						
+					<p id="adaprice">dfg</p>
+
 						<ul>
 							<li>
 								<a href="#intro" id="tmNavLink1" class="scrolly active" data-bg-img="constructive_bg_01.jpg" data-page="#tm-section-1">
@@ -67,7 +74,7 @@
 								</a>
 							</li>							
 							<li>
-								<a href="#Tutorials" id="tmNavLink4" class="scrolly" data-bg-img="constructive_bg_03.jpg" data-page="#tm-section-4">
+								<a href="#guides" id="tmNavLink4" class="scrolly" data-bg-img="constructive_bg_03.jpg" data-page="#tm-section-4">
 									<i class="fas fa-users tm-nav-fa-icon"></i>
 									<span>Our Guides</span>
 								</a>
@@ -145,7 +152,7 @@
 											  </div>
 											</div>
 										  </div>
-										  <a href="#" class="btn tm-btn tm-font-big" data-nav-link="#tmNavLink3">Continue...</a>      
+										  <a onclick="changePage()" class="btn tm-btn tm-font-big" data-nav-link="#tmNavLink3">Continue...</a>     
 							</div>
 						</div>  
 		          	
@@ -153,13 +160,18 @@
 
 					<!-- section 3 stats-->
 					<section id="tm-section-3" class="tm-section">
+						<div class="row mb-4">
+							<header class="col-xl-12"><h2 class="tm-text-shadow">Our Stats</h2></header>		
+						</div>
 						<div class="ml-auto">
+
+							<!-- https://js.adapools.org/pools/be7e2461a584b6532c972edca711fa466d7d0e8a86b6629fc0784ff6/summary.json -->
 							<div class="tm-bg-transparent-black .tm-intro-box">	
 							<div class="individual-card pool-details" >
 								<div>
 								  <div class="card-header">
 								  </div>
-								  <iframe width="500" height="400" frameborder="0" src="https://js.adapools.org/widget-dark.html?pool=be7e2461a584b6532c972edca711fa466d7d0e8a86b6629fc0784ff6">
+								  <iframe width=auto height="600" frameborder="0" src="https://js.adapools.org/widget-dark.html?pool=be7e2461a584b6532c972edca711fa466d7d0e8a86b6629fc0784ff6">
 									<a href="https://adapools.org/pool/be7e2461a584b6532c972edca711fa466d7d0e8a86b6629fc0784ff6">Detail</a></iframe>
 								</div>
 							  </div>
@@ -170,9 +182,11 @@
 
 					
 					<!-- section  guides-->
-					<section id="tm-section-4" class="tm-section">						
+					<section id="tm-section-4" class="tm-section">		
+						<div class="row mb-4">
+							<header class="col-xl-12"><h2 class="tm-text-shadow">Our Guides</h2></header>		
+						</div>				
 						<div class="row">
-
 							<div class="col-sm-12 col-md-6 col-lg-12 col-xl-6 mb-4">
 								<div class="media tm-bg-transparent-black tm-border-white">
 									<i class="fas fa-dollar-sign tm-icon-circled tm-icon-media"></i>
@@ -461,6 +475,7 @@
   			}  			
   		}
 
+
   		// Everything is loaded including images.
       	$(window).on("load", function(){
 
@@ -487,6 +502,16 @@
 		      	
 		      	// Hide all pages
 		      	allPages.hide();
+
+				var json = "1";
+				fetch("https://api.binance.com/api/v3/ticker/price?symbol=ADAUSDT")
+				.then(data=>{return data.json()})  
+				.then(res=>{
+					console.log(res)
+					$("#adaprice").html("Cardano Price (ADAUSDT): " + res.price);
+					console.log(res)});  
+
+
 
 		      	$("#tm-section-1").fadeIn();
 
