@@ -62,25 +62,31 @@
 								</a>
 							</li>
 							<li>
-								<a href="#promise" id="tmNavLink2" class="scrolly" data-bg-img="bg_02.jpg" data-page="#tm-section-2">
+								<a href="#promise" id="tmNavLink2" class="scrolly" data-bg-img="constructive_bg_04.jpg" data-page="#tm-section-2">
 									<i class="fas fa-check tm-nav-fa-icon"></i>
 									<span>Our Promise</span>
 								</a>
-							</li>	
+							</li>
+							<!-- <li>
+								<a href="#rewards" id="tmNavLink3" class="scrolly" data-bg-img="constructive_bg_05.jpg" data-page="#tm-section-3">
+									<i class="fas fa-dollar-sign tm-nav-fa-icon"></i>
+									<span>Your rewards</span>
+								</a>
+							</li>	 -->
 							<li>
-								<a href="#stats" id="tmNavLink3" class="scrolly" data-bg-img="bg_03.jpg" data-page="#tm-section-3">
+								<a href="#stats" id="tmNavLink4" class="scrolly" data-bg-img="bg_03.jpg" data-page="#tm-section-4">
 									<i class="fas fa-chart-bar tm-nav-fa-icon"></i>
 									<span>Our Stats</span>
 								</a>
 							</li>							
 							<li>
-								<a href="#guides" id="tmNavLink4" class="scrolly" data-bg-img="constructive_bg_03.jpg" data-page="#tm-section-4">
+								<a href="#guides" id="tmNavLink5" class="scrolly" data-bg-img="constructive_bg_03.jpg" data-page="#tm-section-5">
 									<i class="fas fa-users tm-nav-fa-icon"></i>
-									<span>Our Guides</span>
+									<span>Guides</span>
 								</a>
 							</li>
 							<li>
-								<a href="#contact" id="tmNavLink5" class="scrolly" data-bg-img="bg_contact.jpg" data-page="#tm-section-5">
+								<a href="#contact" id="tmNavLink6" class="scrolly" data-bg-img="bg_contact.jpg" data-page="#tm-section-6">
 									<i class="fas fa-comments tm-nav-fa-icon"></i>
 									<span>Contact Us</span>
 								</a>
@@ -94,25 +100,36 @@
 
 					<!-- section 1 home-->
 					<section id="tm-section-1" class="tm-section">
+						<div class="row mb-4">
+							<header class="col-xl-12"><h2 class="tm-text-shadow">Introduction</h2></header>		
+						</div>
 						<div class="ml-auto"> 
 						<div class="tm-bg-transparent-black .tm-intro-box">
-							<header class="mb-4"><h1 class="tm-text-shadow">Welcome</h1></header>
 							<p>Welcome to the Shamrock Cardano Staking pool</p>
-							<p>Our aim is to help you earn passive income on your delegated ADA</p>
+							<p>Our aim is to help you earn passive income on your delegated ADA.</p>
 							<br>
 							<p></p>
 							<p></p>
-							<p></p>
-							<header class="mb-4"><h5 class="tm-text-shadow">The Shamrock:</h1></header>
 							<p>☘️The three leaves of a shamrock are said to stand for faith, hope and love.☘️</p> 
 							<p>🍀A fourth leaf represents luck.🍀</p>
-							<a href="#" class="btn tm-btn tm-font-big" data-nav-link="#tmNavLink2">Continue...</a> 
+
+
+<!-- 
+							Upcoming features
+By delegating to Pegasus you don't only increase the security and decentralisation of the Cardano network, but also support the development of the following features.
+
+More graphs and stats to better understand the pool and the network
+Educational materials to spread awareness of the Cardano network
+Additional relay nodes to increase the stability of the network -->
 						</div>
 						</div>
 					</section>
 
 					<!-- section 2 promise-->
 					<section id="tm-section-2" class="tm-section">
+						<div class="row mb-4">
+							<header class="col-xl-12"><h2 class="tm-text-shadow">Our Promise</h2></header>		
+						</div>
 						<div class="ml-auto">
 							<div class="tm-bg-transparent-black .tm-intro-box">	
 										<div class="row" id="tmFeatures">
@@ -123,7 +140,6 @@
 												<div class="tm-feature-icon-container">
 													<i class="fas fa-3x fa-server"></i>
 												</div>
-									
 												<p>Servers can be easily added and upgraded to follow any protocol demand.</p>
 											  </div>
 											</div>
@@ -151,15 +167,37 @@
 												  </p>
 											  </div>
 											</div>
-										  </div>
-										  <a onclick="changePage()" class="btn tm-btn tm-font-big" data-nav-link="#tmNavLink3">Continue...</a>     
+										  </div> 
 							</div>
 						</div>  
 		          	
 					</section>
 
-					<!-- section 3 stats-->
+
+					<!-- section 3 rewards-->
 					<section id="tm-section-3" class="tm-section">
+						<div class="row mb-4">
+							<header class="col-xl-12"><h2 class="tm-text-shadow">Your rewards</h2></header>		
+						</div>
+						<div class="ml-auto">
+
+							<!-- https://js.adapools.org/pools/be7e2461a584b6532c972edca711fa466d7d0e8a86b6629fc0784ff6/summary.json -->
+							<div class="tm-bg-transparent-black .tm-intro-box">	
+							<div class="individual-card pool-details" >
+								<div>
+								  <div class="card-header">
+								  </div>
+								  <iframe width=800 height="400" frameborder="0" src="https://js.adapools.org/widget-dark.html?pool=be7e2461a584b6532c972edca711fa466d7d0e8a86b6629fc0784ff6">
+									<a href="https://adapools.org/pool/be7e2461a584b6532c972edca711fa466d7d0e8a86b6629fc0784ff6">Detail</a></iframe>
+								</div>
+							  </div>
+							</div>
+						</div>
+					</section>
+
+
+					<!-- section 4 stats-->
+					<section id="tm-section-4" class="tm-section">
 						<div class="row mb-4">
 							<header class="col-xl-12"><h2 class="tm-text-shadow">Our Stats</h2></header>		
 						</div>
@@ -171,32 +209,44 @@
 								<div>
 								  <div class="card-header">
 								  </div>
-								  <iframe width=auto height="600" frameborder="0" src="https://js.adapools.org/widget-dark.html?pool=be7e2461a584b6532c972edca711fa466d7d0e8a86b6629fc0784ff6">
+								  <iframe width=800 height="400" frameborder="0" src="https://js.adapools.org/widget-dark.html?pool=be7e2461a584b6532c972edca711fa466d7d0e8a86b6629fc0784ff6">
 									<a href="https://adapools.org/pool/be7e2461a584b6532c972edca711fa466d7d0e8a86b6629fc0784ff6">Detail</a></iframe>
 								</div>
 							  </div>
-							  <a href="#stats" class="btn tm-btn tm-font-big" data-nav-link="#tmNavLink4">Continue...</a>
 							</div>
 						</div>
 					</section>
 
 					
 					<!-- section  guides-->
-					<section id="tm-section-4" class="tm-section">		
+					<section id="tm-section-5" class="tm-section">		
 						<div class="row mb-4">
-							<header class="col-xl-12"><h2 class="tm-text-shadow">Our Guides</h2></header>		
+							<header class="col-xl-12"><h2 class="tm-text-shadow">Guides</h2></header>		
 						</div>				
 						<div class="row">
 							<div class="col-sm-12 col-md-6 col-lg-12 col-xl-6 mb-4">
 								<div class="media tm-bg-transparent-black tm-border-white">
-									<i class="fas fa-dollar-sign tm-icon-circled tm-icon-media"></i>
+									<i class="fas fa-folder-open tm-icon-circled tm-icon-media"></i>
 									<div class="media-body">
-										<h3>COMING SOON</h3>
-										<p>Currently working on reworking guides, Old guides below</p>
-											<p><a href="./pages/guides.html" target="_parent">View</a></p>	
+										<h3>IOHK Guides</h3>
+										<p>List of IOHK guides delegators will find useful.</p>
+										<p><a href="https://iohk.zendesk.com/hc/en-us/sections/360002109394-Basic-Use" target="_blank">View</a></p>	
 									</div>
 								</div>
 							</div>
+
+							<div class="col-sm-12 col-md-6 col-lg-12 col-xl-6 mb-4">
+								<div class="media tm-bg-transparent-black tm-border-white">
+									<i class="fas fa-dollar-sign tm-icon-circled tm-icon-media"></i>
+									<div class="media-body">
+										<h3>Purchase ADA</h3>
+										<p>How to purchase ADA and transfer to Daedalus.</p>
+											<p><a href="./pages/guide_purchaseada.html" target="_blank">View</a></p>	
+									</div>
+								</div>
+							</div>
+
+
 
 							<!-- <div class="col-sm-12 col-md-6 col-lg-12 col-xl-6 mb-4">
 								<div class="media tm-bg-transparent-black tm-border-white">
@@ -249,59 +299,8 @@
 						</div>						               
 					</section>
 
-					<!-- section 4 -->
-					<section id="tm-section-4.1" class="tm-section">
-						<div class="sidebar one_quarter first"> 
-							<section class="sidebar">
-							<h2>How to Purchase ADA</h2>
-								<h3>
-									<nav class="sdb_holder">
-									<ul>
-										<ul>
-											<li><a href="#purchasebinance">Binance</a></li>
-											<li><a href="#withdraw">Withdraw to Daedalus</a></li>
-										</ul>
-									</ul>
-									</nav>
-								</h3>
-							</section>
-						</div>	
-						  <div class="content three_quarter"> 
-							<div style="overflow-y: scroll; height:800px;">
-
-					  
-					  
-							<h1 id="purchasebinance">Binance</h2>
-							<p>To be able to purchase ADA you will need to use a crypto exchange.</p>
-							<p>For this example we will use <a href="https://www.binance.com/" target="_blank">Binance.com</a></p>
-							<p>1. Go to Markets, search for ADA and click Trade.</p>
-							<img src="../images/binance_market.png" alt=""/>
-							<p>2. When purchasing ADA I recommend setting a price for best value.</p>
-							<p>   Congratulations you now own ADA!!! Stake it!</p>
-							<img src="../images/binance_ada_buy.png" alt=""/>
-					  
-							<h1 id="withdraw">Withdraw To Daedalus</h2>
-							<p>1. On Binance click Wallet then Fiat and Spot </p>
-							<p>   Here you will see the purchased ADA you own, click Withdraw </p>
-							<img src="../images/binance_cardano.png" alt=""/>
-							<p>2. Go to your Daedalus app and select receive, click share then copy address. </p>
-							<img src="../images/daedalus_recieve_code.jpg" alt=""/>
-							<p>3. On Binance enter the Daedalus code, ADA amount and Submit. </p>
-							<img src="../images/binance_withdraw.jpg" alt=""/>
-							<p>4. The transaction should take a few minutes and then you are ready to delegate your cardano to begin earning rewards. </p>
-					  
-							<p>SHA☘</p>
-							
-						  </div>
-							<!-- ################################################################################################ -->
-						  </div>
-						  <!-- ################################################################################################ -->
-						  <!-- / main body -->
-						  <div class="clear"></div>
-						</section>
-
 					<!-- section 5 -->
-					<section id="tm-section-5" class="tm-section">
+					<section id="tm-section-6" class="tm-section">
 
 							<div class="row mb-4">
 								<header class="col-xl-12"><h2 class="tm-text-shadow">Contact Us</h2></header>		
