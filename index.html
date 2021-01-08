@@ -48,31 +48,31 @@
 					<p id="adaprice">dfg</p>
 						<ul>
 							<li>
-								<a href="#intro" id="tmNavLink1" class="scrolly" data-page="#tm-section-2">
+								<a href="#intro" id="tmNavLink1" class="scrolly" data-page="#intro">
 									<i class="fas fa-home tm-nav-fa-icon"></i>
 									<span>Introduction</span>
 								</a>
 							</li>
 							<li>
-								<a href="#staking" id="tmNavLink2" class="scrolly" data-page="#tm-section-3">
+								<a href="#staking" id="tmNavLink2" class="scrolly" data-page="#staking">
 									<i class="fas fa-check tm-nav-fa-icon"></i>
 									<span>Staking</span>
 								</a>
 							</li>
 							<li>
-								<a href="#stats" id="tmNavLink4" class="scrolly" data-page="#tm-section-4">
+								<a href="#stats" id="tmNavLink4" class="scrolly" data-page="#stats">
 									<i class="fas fa-chart-bar tm-nav-fa-icon"></i>
 									<span>Our Stats</span>
 								</a>
 							</li>							
 							<li>
-								<a href="#guides" id="tmNavLink5" class="scrolly"  data-page="#tm-section-5">
+								<a href="#guides" id="tmNavLink5" class="scrolly"  data-page="#guides">
 									<i class="fas fa-users tm-nav-fa-icon"></i>
 									<span>Guides</span>
 								</a>
 							</li>
 							<li>
-								<a href="#contact" id="tmNavLink6" class="scrolly" data-page="#tm-section-6">
+								<a href="#contact" id="tmNavLink6" class="scrolly" data-page="#contact">
 									<i class="fas fa-comments tm-nav-fa-icon"></i>
 									<span>Contact Us</span>
 								</a>
@@ -85,7 +85,7 @@
 			<div class="col-xl-9 col-lg-8 col-md-12 col-sm-12 tm-content">
 
 					<!-- section 1 Intro-->
-					<section id="tm-section-2" class="tm-section">
+					<section id="intro" class="tm-section">
 						<div class="tm-bg-transparent-black .tm-intro-box">	
 						<div class="row mb-4">
 							<header class="col-xl-12"><h2 class="tm-text-shadow">Introduction</h2></header>		
@@ -147,7 +147,7 @@
 
 
 					<!-- section 3 rewards-->
-					<section id="tm-section-3" class="tm-section">
+					<section id="staking" class="tm-section">
 						<div class="tm-bg-transparent-black .tm-intro-box">	
 						<div class="row mb-4">
 							<header class="col-xl-12"><h2 class="tm-text-shadow">What is Staking in Cryptocurrency?</h2></header>		
@@ -199,8 +199,8 @@
 					</section>
 
 
-					<!-- section 4 stats-->
-					<section id="tm-section-4" class="tm-section">
+					<!-- section  stats-->
+					<section id="stats" class="tm-section">
 						<div class="row mb-4">
 							<header class="col-xl-12"><h2 class="tm-text-shadow">Stats</h2></header>		
 						</div>		
@@ -240,7 +240,7 @@
 
 					
 					<!-- section  guides-->
-					<section id="tm-section-5" class="tm-section">		
+					<section id="guides" class="tm-section">		
 						<div class="row mb-4">
 							<header class="col-xl-12"><h2 class="tm-text-shadow">Guides</h2></header>		
 						</div>				
@@ -292,7 +292,7 @@
 					</section>
 
 					<!-- section 5 -->
-					<section id="tm-section-6" class="tm-section">
+					<section id="contact" class="tm-section">
 
 							<div class="row mb-4">
 								<header class="col-xl-12"><h2 class="tm-text-shadow">Contact Us</h2></header>		
@@ -344,12 +344,11 @@
 		<script>
 
 		var sidebarVisible = false;
-		var currentPageID = "#tm-section-2";
+		var currentPageID;
 		
 
 		async function calculateReturns() {
 			var roi = 0.05;
-
 
 			var totalAda = document.getElementById("totalAda").value;
 			console.log("total ada: " + totalAda);
@@ -456,27 +455,9 @@
   				$(".tm-content").css("margin-bottom", "0");
   				footer.css("bottom", "20px");  				
   			}  			
-  		}
-
-		//   function getAdaPriceUSD()
-		//   {
-		// 	// var response = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=ADAUSDT").json();
-
-		// 	var response;
-		// 	fetch("https://api.binance.com/api/v3/ticker/price?symbol=ADAUSDT")
-		// 		.then(res => res.json())
-		// 		.then(data => response = data)
-		// 		.then(() => callback(response))
-			
-		// 	console.log(response);
-
-		// 	$("#adaprice").html("Cardano Price (ADAUSDT): " + response.price);
-	
-		// 	return response.price;
-		//   }
-
-
-		  async function getAdaPriceUSD() {
+		  }
+		  
+		async function getAdaPriceUSD() {
 			//await the response of the fetch call
 			let response = await 
 			fetch('https://api.binance.com/api/v3/ticker/price?symbol=ADAUSDT');
@@ -534,7 +515,13 @@
 				});
 
 
-		      	$("#tm-section-2").fadeIn();
+				if(window.location.hash) {
+					$(window.location.hash).fadeIn();
+					currentPageID = window.location.hash;
+				} else {
+					$("#intro").fadeIn();
+					currentPageID = "#intro";
+				}
 
 		     	// Set up background first page
 		     	$.backstretch("images/backgrounds/" + getRandomImage(), {fade: 500});
