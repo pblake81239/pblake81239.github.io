@@ -24,6 +24,21 @@ body {
 
 ul { margin: 0; padding: 0; }
 
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: auto;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 a, button { transition: all 0.3s ease; }
 button:focus { outline: none; }
 a:focus {

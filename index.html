@@ -149,53 +149,63 @@
 					<!-- section 3 rewards-->
 					<section id="staking" class="tm-section">
 						<div class="tm-bg-transparent-black .tm-intro-box">	
-						<div class="row mb-4">
-							<header class="col-xl-12"><h2 class="tm-text-shadow">What is Staking in Cryptocurrency?</h2></header>		
-						</div>
-						<div class="ml-auto">
-							<p>
-								To take part in the Proof Of Stake process, users save up digital assets to form a 'stake,' 
-								and delegate it to those who do all the upkeeping work and get a share of the reward in return. 
-								This process is called staking.
-								By staking, you take part in the consensus mechanism, and the nodes that work as staking pools, 
-								share a part of their rewards, according to your stake with them.
-							</p>
-
-						</div>
-						</div>
-						<div class="tm-bg-transparent-black .tm-intro-box">	
 							<div class="row mb-4">
-								<header class="col-xl-12"><h2 class="tm-text-shadow">Calculate rewards - Still in BETA!</h2></header>	
+								<header class="col-xl-12"><h2 class="tm-text-shadow">What is Staking in ADA?</h2></header>		
 							</div>
 							<div class="row tm-page-4-content">
-								<div class="col-md-6 col-sm-12 tm-contact-col">
+								<p>
+									To take part in the Proof Of Stake process, users save up digital assets(ADA) to form a 'stake,' 
+									and delegate it to those who do all the upkeeping work and get a share of the reward in return. 
+									This process is called staking.
+									By staking, you take part in the consensus mechanism, and the nodes that work as staking pools, 
+									share a part of their rewards, according to your stake with them.
+								</p>
 
-										<form id="calculatestake" action="#calculatestake" method="post" class="contact-form">
-											<div class="form-group">
-												<p>How much Cardano do you have?</p>
-												<input type="number" min="0" id="totalAda" name="total_ada" class="form-control" oninput="calculateReturns()" placeholder="0" required>
-											</div>
-										</form>
-										<p id="valueInUsd">Total Value In USD: $</p>
-										<p>Staking rewards:</p>
-										<p id="dailyRewards">Daily ADA earned:</p>
-										<p id="monthlyReqards">Monthly ADA earned:</p>
-										<p id="yearlyRewards">Yearly ADA earned:</p>
-
-								</div>
-								<!-- <div class="col-md-6 col-sm-12 tm-contact-col">
-									<div class="tm-address-box">
-										<p>Aliquam interdum, nisl sedd faucibus tempor, massa velit laoreet ipsum, et faucibus sapien magna at enim. Suspendisse a dictum tortor.</p>
-										<p>Curabitur venenatis leo in augue convallis, vulputate sollicitudin ex maximus.</p>
-										<address>
-											120-240 Aliquam nec neque augue<br>
-											Suspendisse tincidunt nunc,<br>
-											vitae sagis justo 11000
-										</address>
-									</div>
-								</div> -->
 							</div>
+						</div>	
+						<p></p>
+						<div class="tm-bg-transparent-black .tm-intro-box">	
+							<div class="row mb-4">
+								<header class="col-xl-12"><h2 class="tm-text-shadow">Calculate Staking rewards - Still in BETA!</h2></header>	
+							</div>
+							<div class="col-md-6 col-sm-12 tm-contact-col">
+									<form id="calculatestake" action="#calculatestake" method="post" class="contact-form">
+										<div class="form-group">
+											<p>How much Cardano do you have?</p>
+											<input type="number" min="0" id="totalAda" name="total_ada" class="form-control" oninput="calculateReturns()" placeholder="0" required>
+											<p id="adapricerewards"></p>
+											<p id="valueInUsd">Total Value In USD: $</p>
+											<p id="roi">Return on investment %</p>
+										</div>
+									</form>
+							</div>
+						<!-- </div>
+						<p></p>
+						<div class="tm-bg-transparent-black .tm-intro-box">	 -->
+							<div class="row mb-4">
+								<header class="col-xl-12"><h2 class="tm-text-shadow">Rewards</h2></header>	
+							</div>
+
+							<!-- <p id="dailyRewards">Daily ADA earned:</p>
+							<p id="monthlyReqards">Monthly ADA earned:</p>
+							<p id="yearlyRewards">Yearly ADA earned:</p> -->
+
+							<div class="row">
+								<div class="column">
+								  <h2>Daily</h2>
+								  <p id="dailyRewards"></p>
+								</div>
+								<div class="column">
+								  <h2>Monthly</h2>
+								  <p id="monthlyReqards"></p>
+								</div>
+								<div class="column">
+									<h2>Yearly</h2>
+									<p id="yearlyRewards"></p>
+								  </div>
+							  </div>
 						</div>
+
 					</section>
 
 
@@ -349,21 +359,23 @@
 
 		async function calculateReturns() {
 			var roi = 0.05;
+			$("#roi").html("Return on investment : %" + roi * 100);
+
+			var adaPrice = await getAdaPriceUSD();
 
 			var totalAda = document.getElementById("totalAda").value;
-			console.log("total ada: " + totalAda);
 
 			var valueInUsd = totalAda * await getAdaPriceUSD();
-			$("#valueInUsd").html("Value In USD: $" + CommaFormatted(valueInUsd.toFixed(3)));
+			$("#valueInUsd").html("Total Value In USD :  $" + CommaFormatted(valueInUsd.toFixed(3)));
 
 			var dailyRewards = totalAda * roi / 365;
-			$("#dailyRewards").html("Daily : " + CommaFormatted(dailyRewards.toFixed(3)) + "ADA, USD: $" + CommaFormatted((dailyRewards * await getAdaPriceUSD()).toFixed(3)));
+			$("#dailyRewards").html("ADA: " + CommaFormatted(dailyRewards.toFixed(2)) + "<br/> USD: $" + CommaFormatted((dailyRewards * adaPrice).toFixed(2)));
 
 			var monthlyReqards = totalAda * roi / 12;
-			$("#monthlyReqards").html("Monthly : " + CommaFormatted(monthlyReqards.toFixed(3)) + "ADA, USD: $" + CommaFormatted((monthlyReqards * await getAdaPriceUSD()).toFixed(3)));
+			$("#monthlyReqards").html("ADA: " + CommaFormatted(monthlyReqards.toFixed(2)) + "<br/> USD: $" + CommaFormatted((monthlyReqards * adaPrice).toFixed(2)));
 
 			var yearlyRewards = totalAda * roi;
-			$("#yearlyRewards").html("Yearly : " + CommaFormatted(yearlyRewards.toFixed(3)) + "ADA, USD: $" + CommaFormatted((yearlyRewards * await getAdaPriceUSD()).toFixed(3)));
+			$("#yearlyRewards").html("ADA: " + CommaFormatted(yearlyRewards.toFixed(2)) + "<br/> USD: $" + CommaFormatted((yearlyRewards * adaPrice).toFixed(2)));
 		}
 
 		function CommaFormatted(amount) {
@@ -465,7 +477,10 @@
 				let data = await response.json() // this is probably a sync function, you don't need await here
 				//proceed only when the second promise is resolved
 				console.log(data.price)
-				$("#adaprice").html("Cardano Price (ADAUSDT): " + data.price);
+				$("#adaprice").html("Current Price (ADAUSDT): " + data.price);
+				$("#adapricerewards").html("Current Price (ADAUSDT): " + data.price);
+				
+
 				return data.price;
 		}
 
