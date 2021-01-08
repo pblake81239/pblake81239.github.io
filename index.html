@@ -174,22 +174,17 @@
 											<p>How much Cardano do you have?</p>
 											<input type="number" min="0" id="totalAda" name="total_ada" class="form-control" oninput="calculateReturns()" placeholder="0" required>
 											<p id="adapricerewards"></p>
-											<p id="valueInUsd">Total Value In USD: $</p>
+											<p id="valueInUsd">Current Value In USD: $</p>
 											<p id="roi">Return on investment %</p>
 										</div>
 									</form>
 							</div>
-						<!-- </div>
+						</div>
 						<p></p>
-						<div class="tm-bg-transparent-black .tm-intro-box">	 -->
-							<div class="row mb-4">
-								<header class="col-xl-12"><h2 class="tm-text-shadow">Rewards</h2></header>	
-							</div>
-
-							<!-- <p id="dailyRewards">Daily ADA earned:</p>
-							<p id="monthlyReqards">Monthly ADA earned:</p>
-							<p id="yearlyRewards">Yearly ADA earned:</p> -->
-
+						<div class="tm-bg-transparent-black .tm-intro-box">	
+							<p></p>
+							<header class="col-xl-12"><h2 class="tm-text-shadow">Rewards Basic</h2></header>
+							<p>This calculation is a basic representation of the potential rewards.</p>	
 							<div class="row">
 								<div class="column">
 								  <h2>Daily</h2>
@@ -204,8 +199,28 @@
 									<p id="yearlyRewards"></p>
 								  </div>
 							  </div>
+							  <p></p>
+							</div>
+							<p></p>
+							<div class="tm-bg-transparent-black .tm-intro-box">	
+							  <header class="col-xl-12"><h2 class="tm-text-shadow">Rewards Compounded</h2></header>	
+							  <p>Compounding is the staking rewards based on both the initial principal and the accumulated interest from previous periods.
+								  <br/>The results below are the total amount after each year based on a static price and compounding yearly.<br/></p>
+							  <div class="row">
+								<div class="column">
+								  <h2>1 Year</h2>
+								  <p id="oneYearCompound"></p>
+								</div>
+								<div class="column">
+								  <h2>2 Year</h2>
+								  <p id="twoYearCompound"></p>
+								</div>
+								<div class="column">
+									<h2>3 Year</h2>
+									<p id="threeYearCompound"></p>
+								  </div>
+							  </div>
 						</div>
-
 					</section>
 
 
@@ -369,13 +384,36 @@
 			$("#valueInUsd").html("Total Value In USD :  $" + CommaFormatted(valueInUsd.toFixed(3)));
 
 			var dailyRewards = totalAda * roi / 365;
-			$("#dailyRewards").html("ADA: " + CommaFormatted(dailyRewards.toFixed(2)) + "<br/> USD: $" + CommaFormatted((dailyRewards * adaPrice).toFixed(2)));
+			$("#dailyRewards").html("ADA: " + CommaFormatted(dailyRewards.toFixed(2)) + "<br/> USD: $" + adaToUsdFormatted(dailyRewards, adaPrice));
 
 			var monthlyReqards = totalAda * roi / 12;
-			$("#monthlyReqards").html("ADA: " + CommaFormatted(monthlyReqards.toFixed(2)) + "<br/> USD: $" + CommaFormatted((monthlyReqards * adaPrice).toFixed(2)));
+			$("#monthlyReqards").html("ADA: " + CommaFormatted(monthlyReqards.toFixed(2)) + "<br/> USD: $" + adaToUsdFormatted(monthlyReqards, adaPrice));
 
 			var yearlyRewards = totalAda * roi;
-			$("#yearlyRewards").html("ADA: " + CommaFormatted(yearlyRewards.toFixed(2)) + "<br/> USD: $" + CommaFormatted((yearlyRewards * adaPrice).toFixed(2)));
+			$("#yearlyRewards").html("ADA: " + CommaFormatted(yearlyRewards.toFixed(2)) + "<br/> USD: $" + adaToUsdFormatted(yearlyRewards, adaPrice));
+
+			var oneYearCompound = calcaluteCompound(totalAda, roi, 1);
+			var oneYearCompoundUSD =adaToUsdFormatted(oneYearCompound, adaPrice);
+			$("#oneYearCompound").html("ADA: " + oneYearCompound + "<br/> USD: $" + oneYearCompoundUSD);
+
+			var twoYearCompound = calcaluteCompound(totalAda, roi, 2);
+			$("#twoYearCompound").html("ADA: " + twoYearCompound + "<br/> USD: $" + adaToUsdFormatted(twoYearCompound, adaPrice));
+
+			var threeYearCompound = calcaluteCompound(totalAda, roi, 3);
+			$("#threeYearCompound").html("ADA: " + threeYearCompound + "<br/> USD: $" + adaToUsdFormatted(threeYearCompound, adaPrice));
+			
+		}
+
+		function calcaluteCompound(amount, interest, years)
+		{
+			var result = amount * Math.pow((1 + interest / 12), (12*years));
+			return result.toFixed(2);
+		}
+
+		function adaToUsdFormatted(adaAmount, adaPrice)
+		{
+			var totalUSD = adaAmount * adaPrice;
+			return totalUSD.toFixed(2);
 		}
 
 		function CommaFormatted(amount) {
