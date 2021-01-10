@@ -54,9 +54,15 @@
 								</a>
 							</li>
 							<li>
+								<a href="#stakingfaq" id="tmNavLink2" class="scrolly" data-page="#stakingfaq">
+									<i class="fas fa-question tm-nav-fa-icon"></i>
+									<span>Staking FAQ</span>
+								</a>
+							</li>
+							<li>
 								<a href="#staking" id="tmNavLink2" class="scrolly" data-page="#staking">
-									<i class="fas fa-check tm-nav-fa-icon"></i>
-									<span>Staking</span>
+									<i class="fas fa-dollar-sign tm-nav-fa-icon"></i>
+									<span>Staking Calculator</span>
 								</a>
 							</li>
 							<li>
@@ -145,9 +151,8 @@
 						</div>  
 					</section>
 
-
-					<!-- section 3 rewards-->
-					<section id="staking" class="tm-section">
+					<!-- section 2 staking faq-->
+					<section id="stakingfaq" class="tm-section">
 						<div class="tm-bg-transparent-black .tm-intro-box">	
 							<div class="row mb-4">
 								<header class="col-xl-12"><h2 class="tm-text-shadow">What is Staking in ADA?</h2></header>		
@@ -163,6 +168,10 @@
 
 							</div>
 						</div>	
+					</section>
+
+					<!-- section 3 staking calc-->
+					<section id="staking" class="tm-section">
 						<p></p>
 						<div class="tm-bg-transparent-black .tm-intro-box">	
 							<div class="row mb-4">
@@ -171,11 +180,18 @@
 							<div class="col-md-6 col-sm-12 tm-contact-col">
 									<form id="calculatestake" action="#calculatestake" method="post" class="contact-form">
 										<div class="form-group">
+											<p>Currency of choice:</p>
+
+											<select name="currencies" id="currencies" onchange="calculateReturns()" onload="calculateReturns()">
+												<option selected="selected" value="USD">USD</option>
+												<option value="EURO">EURO</option>
+											 </select>
+											 <p id="adapricerewards"></p>
+
 											<p>How much Cardano do you have?</p>
 											<input type="number" min="0" id="totalAda" name="total_ada" class="form-control" oninput="calculateReturns()" placeholder="0" required>
-											<p id="adapricerewards"></p>
-											<p id="valueInUsd">Current Value In USD: $</p>
-											<p id="roi">Return on investment %</p>
+											<p id="valueInUsd"></p>
+											<p id="roi"></p>
 										</div>
 									</form>
 							</div>
@@ -190,6 +206,10 @@
 								  <h2>Daily</h2>
 								  <p id="dailyRewards"></p>
 								</div>
+								<div class="column">
+									<h2>Epoch</h2>
+									<p id="epochRewards"></p>
+								  </div>
 								<div class="column">
 								  <h2>Monthly</h2>
 								  <p id="monthlyReqards"></p>
@@ -349,7 +369,7 @@
 										<i class=" fab fa-telegram tm-icon-circled tm-icon-media"></i>
 										<div class="media-body">
 											<h3>Telegram</h3>
-											<a href="https://t.me/shamrockpool" target="_blank">@shamrockpool</a></p>	
+											<a href="https://t.me/shamrockstakepool" target="_blank">@shamrockstakepool</a></p>	
 										</div>
 									</div>
 								</div>	
@@ -373,35 +393,44 @@
 		
 
 		async function calculateReturns() {
-			var roi = 0.05;
-			$("#roi").html("Return on investment : %" + roi * 100);
 
-			var adaPrice = await getAdaPriceUSD();
+			var selectedCurrency = document.getElementById("currencies").value;
+			var currencySymbol = selectedCurrency == 'USD' ? '$' : '€';
+			var adaPrice = await getCurrentAdaPrice(selectedCurrency);
+			$("#adapricerewards").html("Current ADA Price: " + adaPrice);
 
 			var totalAda = document.getElementById("totalAda").value;
+			if(totalAda !== "")
+			{
+				var roi = 0.05;
+				$("#roi").html("Return on investment : " + roi * 100 + "%");
 
-			var valueInUsd = totalAda * await getAdaPriceUSD();
-			$("#valueInUsd").html("Total Value In USD :  $" + CommaFormatted(valueInUsd.toFixed(3)));
+				var valueInUsd = totalAda * adaPrice;
+				$("#valueInUsd").html("Total Currency value :  " + currencySymbol + CommaFormatted(valueInUsd.toFixed(3)));
 
-			var dailyRewards = totalAda * roi / 365;
-			$("#dailyRewards").html("ADA: " + CommaFormatted(dailyRewards.toFixed(2)) + "<br/> USD: $" + adaToUsdFormatted(dailyRewards, adaPrice));
+				var dailyRewards = totalAda * roi / 365;
+				$("#dailyRewards").html("ADA: " + CommaFormatted(dailyRewards.toFixed(2)) + "<br/> " + selectedCurrency + ": "  + currencySymbol + adaToUsdFormatted(dailyRewards, adaPrice));
 
-			var monthlyReqards = totalAda * roi / 12;
-			$("#monthlyReqards").html("ADA: " + CommaFormatted(monthlyReqards.toFixed(2)) + "<br/> USD: $" + adaToUsdFormatted(monthlyReqards, adaPrice));
+				var epochRewards = dailyRewards * 5;
+				$("#epochRewards").html("ADA: " + CommaFormatted(epochRewards.toFixed(2)) + "<br/> " + selectedCurrency + ": "  + currencySymbol + adaToUsdFormatted(epochRewards, adaPrice));
 
-			var yearlyRewards = totalAda * roi;
-			$("#yearlyRewards").html("ADA: " + CommaFormatted(yearlyRewards.toFixed(2)) + "<br/> USD: $" + adaToUsdFormatted(yearlyRewards, adaPrice));
 
-			var oneYearCompound = calcaluteCompound(totalAda, roi, 1);
-			var oneYearCompoundUSD =adaToUsdFormatted(oneYearCompound, adaPrice);
-			$("#oneYearCompound").html("ADA: " + oneYearCompound + "<br/> USD: $" + oneYearCompoundUSD);
+				var monthlyReqards = totalAda * roi / 12;
+				$("#monthlyReqards").html("ADA: " + CommaFormatted(monthlyReqards.toFixed(2)) + "<br/> " + selectedCurrency + ": "  + currencySymbol + adaToUsdFormatted(monthlyReqards, adaPrice));
 
-			var twoYearCompound = calcaluteCompound(totalAda, roi, 2);
-			$("#twoYearCompound").html("ADA: " + twoYearCompound + "<br/> USD: $" + adaToUsdFormatted(twoYearCompound, adaPrice));
+				var yearlyRewards = totalAda * roi;
+				$("#yearlyRewards").html("ADA: " + CommaFormatted(yearlyRewards.toFixed(2)) + "<br/> " + selectedCurrency + ": "  + currencySymbol + adaToUsdFormatted(yearlyRewards, adaPrice));
 
-			var threeYearCompound = calcaluteCompound(totalAda, roi, 3);
-			$("#threeYearCompound").html("ADA: " + threeYearCompound + "<br/> USD: $" + adaToUsdFormatted(threeYearCompound, adaPrice));
-			
+				var oneYearCompound = calcaluteCompound(totalAda, roi, 1);
+				var oneYearCompoundUSD = CommaFormatted(adaToUsdFormatted(oneYearCompound, adaPrice));
+				$("#oneYearCompound").html("ADA: " + oneYearCompound + "<br/> " + selectedCurrency + ": "  + currencySymbol + oneYearCompoundUSD);
+
+				var twoYearCompound = calcaluteCompound(totalAda, roi, 2);
+				$("#twoYearCompound").html("ADA: " + twoYearCompound + "<br/> " + selectedCurrency + ": "  + currencySymbol + CommaFormatted(adaToUsdFormatted(twoYearCompound, adaPrice)));
+
+				var threeYearCompound = calcaluteCompound(totalAda, roi, 3);
+				$("#threeYearCompound").html("ADA: " + threeYearCompound + "<br/> " + selectedCurrency + ": "  + currencySymbol + CommaFormatted(adaToUsdFormatted(threeYearCompound, adaPrice)));
+			}
 		}
 
 		function calcaluteCompound(amount, interest, years)
@@ -507,7 +536,32 @@
   			}  			
 		  }
 		  
+		async function getCurrentAdaPrice(currency) {
+
+			var url;
+			if(currency == "USD")
+			{
+				url = 'https://api.binance.com/api/v3/ticker/price?symbol=ADAUSDT';
+			}
+			else{
+				url = 'https://api.binance.com/api/v3/ticker/price?symbol=ADAEUR';
+			}
+
+			$("#adapricerewards").html("Current Price: ");
+
+			//await the response of the fetch call
+			let response = await 
+			fetch(url);
+				//proceed once the first promise is resolved.
+				let data = await response.json() 
+				return data.price;
+		}
+
+
 		async function getAdaPriceUSD() {
+
+			//https://api.binance.com/api/v3/ticker/price?symbol=ADAEUR
+	  		//'https://api.binance.com/api/v3/ticker/price?symbol=ADAUSDT'
 			//await the response of the fetch call
 			let response = await 
 			fetch('https://api.binance.com/api/v3/ticker/price?symbol=ADAUSDT');
@@ -515,10 +569,7 @@
 				let data = await response.json() // this is probably a sync function, you don't need await here
 				//proceed only when the second promise is resolved
 				console.log(data.price)
-				$("#adaprice").html("Current Price (ADAUSDT): " + data.price);
-				$("#adapricerewards").html("Current Price (ADAUSDT): " + data.price);
-				
-
+				$("#adaprice").html("Current Price (ADAUSDT): " + data.price);				
 				return data.price;
 		}
 
@@ -549,6 +600,7 @@
 		      	allPages.hide();
 
 				getAdaPriceUSD();
+				calculateReturns();
 
 				fetch("https://js.adapools.org/pools/be7e2461a584b6532c972edca711fa466d7d0e8a86b6629fc0784ff6/summary.json")
 				.then(function(response) {
