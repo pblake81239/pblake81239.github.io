@@ -165,9 +165,20 @@
 									By staking, you take part in the consensus mechanism, and the nodes that work as staking pools, 
 									share a part of their rewards, according to your stake with them.
 								</p>
+							</div>
+						</div>
+						<div class="tm-bg-transparent-black .tm-intro-box">	
+							<div class="row mb-4">
+								<header class="col-xl-12"><h2 class="tm-text-shadow">Is my ADA safe?</h2></header>		
+							</div>
+							<div class="row tm-page-4-content">
+								<p>
+									YES! Your coins will should be safely stored in one of the 
+									<a href="https://cardano-community.github.io/support-faq/#/Wallets/list" target="_blank">approved wallets</a> and will never leave. 
+								</p>
 
 							</div>
-						</div>	
+						</div>		
 					</section>
 
 					<!-- section 3 staking calc-->
@@ -359,7 +370,7 @@
 										<i class="far fa-envelope tm-icon-circled tm-icon-media"></i>
 										<div class="media-body">
 											<h3>Email</h3>
-											<p><a href="mailto:shamrockstake@gmail.com" target="_blank">ShamrockStakePool@gmail.com</a></p>	
+											<p><a href="mailto:ShamrockStakePool@gmail.com" target="_blank">ShamrockStakePool@gmail.com</a></p>	
 										</div>
 									</div>
 								</div>
@@ -421,14 +432,14 @@
 				var yearlyRewards = totalAda * roi;
 				$("#yearlyRewards").html("ADA: " + CommaFormatted(yearlyRewards.toFixed(2)) + "<br/> " + selectedCurrency + ": "  + currencySymbol + adaToUsdFormatted(yearlyRewards, adaPrice));
 
-				var oneYearCompound = calcaluteCompound(totalAda, roi, 1);
+				var oneYearCompound = CommaFormatted(calcaluteCompound(totalAda, roi, 1));
 				var oneYearCompoundUSD = CommaFormatted(adaToUsdFormatted(oneYearCompound, adaPrice));
 				$("#oneYearCompound").html("ADA: " + oneYearCompound + "<br/> " + selectedCurrency + ": "  + currencySymbol + oneYearCompoundUSD);
 
-				var twoYearCompound = calcaluteCompound(totalAda, roi, 2);
+				var twoYearCompound = CommaFormatted(calcaluteCompound(totalAda, roi, 2));
 				$("#twoYearCompound").html("ADA: " + twoYearCompound + "<br/> " + selectedCurrency + ": "  + currencySymbol + CommaFormatted(adaToUsdFormatted(twoYearCompound, adaPrice)));
 
-				var threeYearCompound = calcaluteCompound(totalAda, roi, 3);
+				var threeYearCompound = CommaFormatted(calcaluteCompound(totalAda, roi, 3));
 				$("#threeYearCompound").html("ADA: " + threeYearCompound + "<br/> " + selectedCurrency + ": "  + currencySymbol + CommaFormatted(adaToUsdFormatted(threeYearCompound, adaPrice)));
 			}
 		}
@@ -442,7 +453,7 @@
 		function adaToUsdFormatted(adaAmount, adaPrice)
 		{
 			var totalUSD = adaAmount * adaPrice;
-			return totalUSD.toFixed(2);
+			return CommaFormatted(totalUSD.toFixed(2));
 		}
 
 		function CommaFormatted(amount) {

@@ -46,8 +46,8 @@ a:focus {
 	outline: none;
 }
 
-a {	color: #FFF;  }
-
+/* a {	color: #FFF;  } */
+a {	color: #3aff33;  }
 a:hover { color: #FF0; }
 
 h1,h2,h3 { font-weight: 300; }
