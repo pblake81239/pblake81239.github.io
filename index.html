@@ -47,7 +47,7 @@
 				<button id="tmMainNavToggle" class="menu-icon">&#9776;</button>
 				<div class="inner">
 					<nav id="tmMainNav" class="tm-main-nav">
-						<p id="adaprice">dfg</p>
+						<!-- <p id="adaprice">dfg</p> -->
 						<ul>
 							<li>
 								<a href="#intro" id="tmNavLink1" class="scrolly" data-page="#intro">
@@ -210,9 +210,10 @@
 										onload="calculateReturns()">
 										<option selected="selected" value="USD">USD</option>
 										<option value="EURO">EURO</option>
+										<option value="GBP">GBP</option>
+										<option value="BTC">BTC</option>
 									</select>
 									<p id="adapricerewards"></p>
-
 									<p>How much Cardano do you have?</p>
 									<input type="number" min="0" id="totalAda" name="total_ada" class="form-control"
 										oninput="calculateReturns()" placeholder="0" required>
@@ -226,9 +227,9 @@
 					<div class="tm-bg-transparent-black .tm-intro-box">
 						<p></p>
 						<header class="col-xl-12">
-							<h2 class="tm-text-shadow">Rewards Basic</h2>
+							<h2 class="tm-text-shadow">Average Rewards</h2>
 						</header>
-						<p>This calculation is a basic representation of the potential rewards.</p>
+						<p>Pool rewards will vary but should be close to the below results.</p>
 						<div class="row">
 							<div class="column">
 								<h2>Daily</h2>
@@ -257,7 +258,7 @@
 						<p>Compounding is the staking rewards based on both the initial principal and the accumulated
 							interest from previous periods.
 							<br />The results below are the total amount after each year based on a static price and
-							compounding yearly.<br />
+							compounding yearly. This is likely to change alot with rise and fall of ADA price....<br />
 						</p>
 						<div class="row">
 							<div class="column">
@@ -442,6 +443,19 @@
 
 			var selectedCurrency = document.getElementById("currencies").value;
 			var currencySymbol = selectedCurrency == 'USD' ? '$' : '€';
+
+			if(selectedCurrency == 'USD')
+			currencySymbol = '$';
+
+			if(selectedCurrency == 'EURO')
+			currencySymbol = '€';
+
+			if(selectedCurrency == 'GBP')
+			currencySymbol = '£';
+
+			if(selectedCurrency == 'BTC')
+			currencySymbol = '';
+
 			var adaPrice = await getCurrentAdaPrice(selectedCurrency);
 			$("#adapricerewards").html("Current ADA Price: " + adaPrice);
 
@@ -585,8 +599,14 @@
 			if (currency == "USD") {
 				url = 'https://api.binance.com/api/v3/ticker/price?symbol=ADAUSDT';
 			}
-			else {
+			else if(currency == "EURO"){
 				url = 'https://api.binance.com/api/v3/ticker/price?symbol=ADAEUR';
+			}
+			else if(currency == "GBP"){
+				url = 'https://api.binance.com/api/v3/ticker/price?symbol=ADAGBP';
+			}
+			else{
+				url = 'https://api.binance.com/api/v3/ticker/price?symbol=ADABTC';
 			}
 
 			$("#adapricerewards").html("Current Price: ");
@@ -641,7 +661,7 @@
 				// Hide all pages
 				allPages.hide();
 
-				getAdaPriceUSD();
+				//getAdaPriceUSD();
 				calculateReturns();
 
 				fetch("https://js.adapools.org/pools/be7e2461a584b6532c972edca711fa466d7d0e8a86b6629fc0784ff6/summary.json")
